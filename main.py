@@ -64,4 +64,63 @@ print(f"Median: {median_age}")
 print(f"Standard Deviation: {std_dev_age}")
 print("Percentiles:")
 print(percentiles_age)
+print("----------> a")
+# Apply a filter to select rows where 'Age' exceeds 30
+filtered_df = df[df['Age'] > 30]
+
+print("\nRows where 'Age' exceeds 30:")
+print(filtered_df)
+
+print("----------> b")
+# Identify records where the 'Department' column starts with the letter 'S'
+matching_records = df[df['Department'].str.startswith('S')]
+
+# Count how many records match this condition
+matching_count = matching_records.shape[0]
+
+print("\nRecords where 'Department' starts with 'S':")
+print(matching_records)
+print(f"\nTotal number of records where 'Department' starts with 'S': {matching_count}")
+
+print("----------> c")
+
+# Determine the total number of duplicate rows
+duplicate_rows = df.duplicated().sum()
+print(f"\nTotal number of duplicate rows: {duplicate_rows}")
+
+# Remove duplicate rows
+df = df.drop_duplicates()
+
+# Verify that duplicates have been removed
+print(f"\nTotal number of rows after removing duplicates: {df.shape[0]}")
+
+
+grouped_data = df.groupby(['Attrition', 'Department']).size()
+print("Grouped data by Attrition and Department:\n", grouped_data)
+
+#Check for Missing Values and Replace Them if Found:
+missing_values = df.isnull().sum()
+df_filled_missing = df.copy()
+for column in df.columns:
+    if df[column].isnull().sum() > 0:
+        if df[column].dtype == 'object':
+            df_filled_missing[column].fillna(df[column].mode()[0], inplace=True)
+        else:
+            df_filled_missing[column].fillna(df[column].median(), inplace=True)
+print("Missing values in each column:\n", missing_values)
+
+
+#divide a Numerical Column into 5 Equal-Width Bins and Count the Records in Each Bin:
+bins = pd.cut(df['Age'], bins=5)
+bin_counts = bins.value_counts()
+print("Bin counts for Age:\n", bin_counts)
+
+
+
+
+
+
+
+
+
 
