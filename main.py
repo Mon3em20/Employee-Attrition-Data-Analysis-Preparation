@@ -33,12 +33,12 @@ print("---------> d")
 
 # Print the name of the first column.
 print("\nName of the First Column:", df.columns[0])
-print("---------> f")
+print("---------> e")
 
 # Generate a summary of the dataset (non-null counts and data types).
 print("\nDataset Summary:")
 df.info()
-print("---------> g")
+print("---------> f")
 
 # Display distinct values in the 'Department' column
 distinct_departments = df['Department'].unique()
@@ -50,7 +50,7 @@ most_frequent_department = df['Department'].mode()[0]
 print("\nMost frequently occurring value in the 'Department' column:", most_frequent_department)
 
 
-print("---------> h")
+print("---------> g")
 
 # Calculate and present the mean, median, standard deviation, and percentiles for the 'Age' column
 mean_age = df['Age'].mean()
@@ -64,6 +64,8 @@ print(f"Median: {median_age}")
 print(f"Standard Deviation: {std_dev_age}")
 print("Percentiles:")
 print(percentiles_age)
+
+
 print("----------> a")
 # Apply a filter to select rows where 'Age' exceeds 30
 filtered_df = df[df['Age'] > 30]
@@ -116,6 +118,41 @@ bin_counts = bins.value_counts()
 print("Bin counts for Age:\n", bin_counts)
 
 
+
+
+#Convert the data type of a numerical column from integer to string.
+
+print("--------------> d")
+
+
+
+# Convert the data type of the 'Age' column from integer to string
+
+df['Age'] = df['Age'].astype(str)
+
+# Verify the conversion
+print(df.dtypes)
+
+
+
+#Group the dataset based on two selected categorical features and analyze the results.
+print("--------------> e")
+
+# Group the dataset by 'Attrition' and 'Department'
+grouped_data = df.groupby(['Attrition', 'Department']).size()
+
+# Display the grouped data
+print("Grouped data by Attrition and Department:\n", grouped_data)
+
+
+
+
+# Check for missing values
+
+print("--------------> f")
+missing_values = df.isnull().any()
+
+print("Missing values in each column:\n", missing_values)
 
 
 
